@@ -22,6 +22,7 @@ class HomePageMaster:
         self.my_frame4 = ""
         self.my_frame5 = ""
         self.my_frame6 = ""
+        self.my_frame7 = ""
         self.my_ntbk = ''
         self.adminname1 = adminname1
         self.old_passwd = ""
@@ -39,6 +40,8 @@ class HomePageMaster:
         self.newname = ""
         self.newpasswd = ""
         self.con = ""
+        self.con_no = ""
+        self.cur = ""
 
 
 
@@ -99,6 +102,7 @@ class HomePageMaster:
         self.my_frame4 = Frame(self.my_ntbk, width=840, height=540)
         self.my_frame5 = Frame(self.my_ntbk, width=840, height=540)
         self.my_frame6 = Frame(self.my_ntbk, width=840, height=540)
+        self.my_frame7 = Frame(self.my_ntbk, width=840, height=540)
 
         self.my_frame1.pack(fil="both", expand=1)
         self.my_frame2.pack(fil="both", expand=1)
@@ -106,6 +110,7 @@ class HomePageMaster:
         self.my_frame4.pack(fil="both", expand=1)
         self.my_frame5.pack(fil="both", expand=1)
         self.my_frame6.pack(fil="both", expand=1)
+        self.my_frame7.pack(fil="both", expand=1)
 
         self.my_ntbk.add(self.my_frame1, text="Homepage")
         self.my_ntbk.add(self.my_frame2, text="Change Password")
@@ -113,6 +118,8 @@ class HomePageMaster:
         self.my_ntbk.add(self.my_frame4, text="Admin List")
         self.my_ntbk.add(self.my_frame5, text="Add Admins")
         self.my_ntbk.add(self.my_frame6, text="View Records")
+        self.my_ntbk.add(self.my_frame7, text="Generate Bill")
+
 
         home_label = Label(self.my_frame1, image=home_image)
         home_label.place(x=0, y=0)
@@ -130,6 +137,9 @@ class HomePageMaster:
         back_label3.place(x=0, y=0)
 
         back_label3 = Label(self.my_frame6, image=backimg)
+        back_label3.place(x=0, y=0)
+
+        back_label3 = Label(self.my_frame7, image=backimg)
         back_label3.place(x=0, y=0)
 
         my_menu = Menu(self.root, bg="black")
@@ -153,6 +163,7 @@ class HomePageMaster:
         self.my_ntbk.hide(3)
         self.my_ntbk.hide(4)
         self.my_ntbk.hide(5)
+        self.my_ntbk.hide(6)
 
         main_label = Label(self.my_frame2, text="Change Password", font=("Helvetica", 40, "bold"),
                            fg="white", bg="black", padx=20, pady=80)
@@ -222,7 +233,8 @@ class HomePageMaster:
         generate_icon = ImageTk.PhotoImage(generate_icon)
 
         generate_button = Button(self.my_frame1, text="GENERATE BILL", font=("Algerian", 18, "bold"),
-                                 padx=10, pady=5, fg="#2730e3", bg="black", image=generate_icon, compound="left")
+                                 padx=10, pady=5, fg="#2730e3", bg="black", image=generate_icon, compound="left",
+                                 command=self.generate_bill)
         generate_button.place(x=50, y=320)
 
         # exit Button
@@ -428,7 +440,33 @@ class HomePageMaster:
         search_record_button.grid(row=3, column=0, columnspan=2, padx=20, pady=20)
 
 
+########################################################################################################################
 
+        # Generate Bill
+
+        generate_head_label = Label(self.my_frame7, text="SEARCH RECORD", font=("Helvetica", 30, "bold"), fg="blue",
+                                    bg="black", padx=20, pady=20)
+        generate_head_label.grid(row=0, column=0)
+
+        generate_label = Label(self.my_frame7, text="Consumer No:", font=("Helvetica", 10, "bold"), fg="white",
+                               bg="black", padx=20)
+        generate_label.grid(row=1, column=0, pady=10)
+
+        generate_label1 = Label(self.my_frame7, text="Current Reading", font=("Helvetica", 10, "bold"), fg="white",
+                                bg="black", padx=20)
+        generate_label1.grid(row=2, column=0, pady=10)
+
+
+
+        self.con_no = Entry(self.my_frame7, width=30)
+        self.con_no.grid(row=1, column=2, padx=20, pady=10)
+
+        self.cur = Entry(self.my_frame7, width=30)
+        self.cur.grid(row=2, column=2, padx=20, pady=10)
+
+        generate_bill_button = Button(self.my_frame7, text="Generate Bill", font=("Helvetica", 10, "bold"), fg="black",
+                                      bg="green", padx=30)
+        generate_bill_button.grid(row=4, column=0, columnspan=2, padx=20, pady=20)
 
 
 
@@ -448,6 +486,10 @@ class HomePageMaster:
 
 
         self.my_ntbk.select(1)
+
+    def generate_bill(self):
+
+        self.my_ntbk.select(6)
 
 
 
