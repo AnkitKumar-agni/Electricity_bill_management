@@ -3,6 +3,8 @@ from PIL import Image, ImageTk
 from tkinter import ttk
 from tkinter import messagebox
 import mysql.connector
+import datetime
+import webbrowser
 
 
 
@@ -23,6 +25,12 @@ class HomePageMaster:
         self.my_frame5 = ""
         self.my_frame6 = ""
         self.my_frame7 = ""
+        self.my_frame8 = ""
+        self.my_frame9 = ""
+        self.my_frame10 = ""
+        self.my_frame11 = ""
+        self.my_frame12 = ""
+        self.my_frame13 = ""
         self.my_ntbk = ''
         self.adminname1 = adminname1
         self.old_passwd = ""
@@ -42,6 +50,16 @@ class HomePageMaster:
         self.con = ""
         self.con_no = ""
         self.cur = ""
+        self.view_list_entry = ""
+        self.drop = ""
+        self.drop1 = ""
+        self.consumer_no = ""
+        self.con_delete = ""
+        self.search_bill_no = ""
+        self.bill_conentry = ""
+        self.bill_yearentry = ""
+        self.paycon = ""
+        self.payamt = ""
 
 
 
@@ -79,11 +97,15 @@ class HomePageMaster:
     def mainhomepage(self):
 
         global my_listbox
+        global disp_label
+        global my_tree
+        global label
 
         self.root = Tk()
         self.root.title("Electricity Bill Management | Homepage")
         self.root.geometry("840x540")
         self.root.config(bg="black")
+
 
         home_image = Image.open("C:\\Users\\dell\\PycharmProjects\\EBM\\Icons\\label_image.png")
         home_image = home_image.resize((840, 540), Image.ANTIALIAS)
@@ -103,6 +125,14 @@ class HomePageMaster:
         self.my_frame5 = Frame(self.my_ntbk, width=840, height=540)
         self.my_frame6 = Frame(self.my_ntbk, width=840, height=540)
         self.my_frame7 = Frame(self.my_ntbk, width=840, height=540)
+        self.my_frame8 = Frame(self.my_ntbk, width=840, height=540)
+        self.my_frame9 = Frame(self.my_ntbk, width=840, height=540)
+        self.my_frame10 = Frame(self.my_ntbk, width=840, height=540)
+        self.my_frame11 = Frame(self.my_ntbk, width=840, height=540)
+        self.my_frame12 = Frame(self.my_ntbk, width=840, height=540)
+        self.my_frame13 = Frame(self.my_ntbk, width=840, height=540)
+
+
 
         self.my_frame1.pack(fil="both", expand=1)
         self.my_frame2.pack(fil="both", expand=1)
@@ -111,6 +141,14 @@ class HomePageMaster:
         self.my_frame5.pack(fil="both", expand=1)
         self.my_frame6.pack(fil="both", expand=1)
         self.my_frame7.pack(fil="both", expand=1)
+        self.my_frame8.pack(fil="both", expand=1)
+        self.my_frame9.pack(fil="both", expand=1)
+        self.my_frame10.pack(fil="both", expand=1)
+        self.my_frame11.pack(fil="both", expand=1)
+        self.my_frame12.pack(fil="both", expand=1)
+        self.my_frame13.pack(fil="both", expand=1)
+
+
 
         self.my_ntbk.add(self.my_frame1, text="Homepage")
         self.my_ntbk.add(self.my_frame2, text="Change Password")
@@ -119,18 +157,25 @@ class HomePageMaster:
         self.my_ntbk.add(self.my_frame5, text="Add Admins")
         self.my_ntbk.add(self.my_frame6, text="View Records")
         self.my_ntbk.add(self.my_frame7, text="Generate Bill")
+        self.my_ntbk.add(self.my_frame8, text="Search One Customer")
+        self.my_ntbk.add(self.my_frame9, text="See List")
+        self.my_ntbk.add(self.my_frame10, text="Delete Customer")
+        self.my_ntbk.add(self.my_frame11, text="Search Bill")
+        self.my_ntbk.add(self.my_frame12, text="Search Bill")
+        self.my_ntbk.add(self.my_frame13, text="Payment")
+
 
 
         home_label = Label(self.my_frame1, image=home_image)
         home_label.place(x=0, y=0)
 
-        back_label2 = Label(self.my_frame2, image=backimg)
+        back_label2 = Label(self.my_frame2, image=home_image)
         back_label2.place(x=0, y=0)
 
         back_label2 = Label(self.my_frame3, image=home_image)
         back_label2.place(x=0, y=0)
 
-        back_label3 = Label(self.my_frame4, image=backimg)
+        back_label3 = Label(self.my_frame4, image=home_image)
         back_label3.place(x=0, y=0)
 
         back_label3 = Label(self.my_frame5, image=home_image)
@@ -141,6 +186,25 @@ class HomePageMaster:
 
         back_label3 = Label(self.my_frame7, image=backimg)
         back_label3.place(x=0, y=0)
+
+        back_label3 = Label(self.my_frame8, image=home_image)
+        back_label3.place(x=0, y=0)
+
+        back_label3 = Label(self.my_frame9, image=home_image)
+        back_label3.place(x=0, y=0)
+
+        back_label3 = Label(self.my_frame10, image=backimg)
+        back_label3.place(x=0, y=0)
+
+        back_label3 = Label(self.my_frame11, image=backimg)
+        back_label3.place(x=0, y=0)
+
+        back_label3 = Label(self.my_frame12, image=backimg)
+        back_label3.place(x=0, y=0)
+
+        back_label3 = Label(self.my_frame13, image=home_image)
+        back_label3.place(x=0, y=0)
+
 
         my_menu = Menu(self.root, bg="black")
         self.root.config(menu=my_menu)
@@ -164,6 +228,15 @@ class HomePageMaster:
         self.my_ntbk.hide(4)
         self.my_ntbk.hide(5)
         self.my_ntbk.hide(6)
+        self.my_ntbk.hide(7)
+        self.my_ntbk.hide(8)
+        self.my_ntbk.hide(9)
+        self.my_ntbk.hide(10)
+        self.my_ntbk.hide(11)
+        self.my_ntbk.hide(12)
+
+
+#######################################################################################################################
 
         main_label = Label(self.my_frame2, text="Change Password", font=("Helvetica", 40, "bold"),
                            fg="white", bg="black", padx=20, pady=80)
@@ -213,7 +286,7 @@ class HomePageMaster:
         cus_button = Button(self.my_frame1, text="CUSTOMER", font=("Algerian", 18, "bold"),
                             padx=10, pady=5, fg="#2730e3", bg="black", image=cus_img, compound="left",
                             command=self.add_customer)
-        cus_button.place(x=50, y=180)
+        cus_button.place(x=50, y=120)
 
         # view records Button
 
@@ -224,7 +297,7 @@ class HomePageMaster:
         view_button = Button(self.my_frame1, text="RECORDS", font=("Algerian", 18, "bold"),
                              padx=10, pady=5, fg="#2730e3", bg="black", image=record_img, compound="left",
                              command=self.Records)
-        view_button.place(x=50, y=250)
+        view_button.place(x=50, y=190)
 
         # generate bill Button
 
@@ -232,10 +305,33 @@ class HomePageMaster:
         generate_icon = generate_icon.resize((35, 35), Image.ANTIALIAS)
         generate_icon = ImageTk.PhotoImage(generate_icon)
 
+
         generate_button = Button(self.my_frame1, text="GENERATE BILL", font=("Algerian", 18, "bold"),
                                  padx=10, pady=5, fg="#2730e3", bg="black", image=generate_icon, compound="left",
                                  command=self.generate_bill)
-        generate_button.place(x=50, y=320)
+        generate_button.place(x=50, y=260)
+
+        # Delete Button
+
+        delete_img = Image.open("C:\\Users\\dell\\PycharmProjects\\EBM\\icons\\delete_icon.png")
+        delete_img = delete_img.resize((25, 25), Image.ANTIALIAS)
+        delete_img = ImageTk.PhotoImage(delete_img)
+
+        delete_button = Button(self.my_frame1, text="Delete", font=("Algerian", 18, "bold"),
+                               padx=10, pady=5, fg="#2730e3", bg="black", image=delete_img, compound="left",
+                               command=self.delete_customer)
+        delete_button.place(x=250, y=120)
+
+        # Payment Page
+
+        payment_img = Image.open("C:\\Users\\dell\\PycharmProjects\\EBM\\icons\\payment.png")
+        payment_img = payment_img.resize((25, 25), Image.ANTIALIAS)
+        payment_img = ImageTk.PhotoImage(payment_img)
+
+        payment_button = Button(self.my_frame1, text="Payment", font=("Algerian", 18, "bold"),
+                                padx=10, pady=5, fg="#2730e3", bg="black", image=payment_img, compound="left",
+                                command=self.payment_select)
+        payment_button.place(x=50, y=320)
 
         # exit Button
 
@@ -249,7 +345,7 @@ class HomePageMaster:
         exit_button.place(x=50, y=420)
 
 
-
+#######################################################################################################################
 
         # Add Customer Page
 
@@ -378,47 +474,48 @@ class HomePageMaster:
         back_button.grid(row=10, column=1, sticky="e")
 
 
-
-
+########################################################################################################################
         # List Of Admins
 
 
-        try:
-
-            db = mysql.connector.connect(
-                host="localhost",
-                user="root",
-                passwd="Iamankit@02",
-                database="ebm"
-            )
-
-            my_listbox = Listbox(self.my_frame4, bg="black", fg="white", width=50, height=200)
-            my_listbox.grid(row=0, column=0)
-            cursor = db.cursor()
-            cursor.execute("SELECT Name Adminno from admin")
-            admins = cursor.fetchall()
-            for admin in admins:
-
-                my_listbox.insert(END, admin[0])
-
-
-        except :
-
-            messagebox.showerror("ERROR", "!!ERROR!!")
-
-
-
-        details_button = Button(self.my_frame4, text="See Details", font=("Helvetica", 10, "bold"),
-                                fg="black", bg="grey", command=self.see_detailsadmin)
-        details_button.place(x=350, y=50)
-
-        deleteadmin_button = Button(self.my_frame4, text="Delete", font=("Helvetica", 10, "bold"),
-                                    fg="black", bg="grey")
-        deleteadmin_button.place(x=490, y=50)
-
-        closeadmin_button = Button(self.my_frame4, text="Close", font=("Helvetica", 10, "bold"),
-                                   fg="black", bg="red", command=lambda: self.close(3))
-        closeadmin_button.place(x=560, y=50)
+        # try:
+        #
+        #     db = mysql.connector.connect(
+        #         host="localhost",
+        #         user="root",
+        #         passwd="Iamankit@02",
+        #         database="ebm"
+        #     )
+        #
+        #     my_listbox = Listbox(self.my_frame4, bg="black", fg="white", width=50, height=200)
+        #     my_listbox.grid(row=0, column=0)
+        #     cursor = db.cursor()
+        #     cursor.execute("SELECT Name Adminno from admin")
+        #     admins = cursor.fetchall()
+        #     for admin in admins:
+        #
+        #         my_listbox.insert(END, admin[0])
+        #
+        #
+        # except :
+        #
+        #     messagebox.showerror("ERROR", "!!ERROR!!")
+        #
+        label = Label(self.my_frame4, text="", fg="White", bg="black",
+                      font=("Helvetica", 10, "bold"), padx=20)
+        label.place(x=350, y=200)
+        #
+        # details_button = Button(self.my_frame4, text="See Details", font=("Helvetica", 10, "bold"),
+        #                         fg="black", bg="grey", command=self.see_detailsadmin)
+        # details_button.place(x=350, y=50)
+        #
+        # deleteadmin_button = Button(self.my_frame4, text="Delete", font=("Helvetica", 10, "bold"),
+        #                             fg="black", bg="grey", command=self.delete_admins)
+        # deleteadmin_button.place(x=490, y=50)
+        #
+        # closeadmin_button = Button(self.my_frame4, text="Close", font=("Helvetica", 10, "bold"),
+        #                            fg="black", bg="red", command=lambda: self.close(3))
+        # closeadmin_button.place(x=560, y=50)
 
 ########################################################################################################################
 
@@ -428,23 +525,170 @@ class HomePageMaster:
                                 bg="black", padx=20, pady=20)
         view_head_label.grid(row=0, column=0)
 
-        view_head_label = Label(self.my_frame6, text="Consumer No:", font=("Helvetica", 10, "bold"), fg="white",
-                                bg="black", padx=20)
-        view_head_label.grid(row=1, column=0)
 
-        self.con = Entry(self.my_frame6, width=30)
+        search_0ne_button = Button(self.my_frame6, text="Search One Customer", font=("Helvetica", 15, "bold"),
+                                   fg="yellow", bg="black", padx=20, pady=10, command=self.See_one_customer)
+        search_0ne_button.place(x=150, y=180)
+
+        search_list_button = Button(self.my_frame6, text="See Customer List", font=("Helvetica", 15, "bold"),
+                                    fg="yellow", bg="black", padx=20, pady=10, command=self.See_list)
+        search_list_button.place(x=150, y=260)
+
+        search_bill_button = Button(self.my_frame6, text="Search Bill Through Bill No", font=("Helvetica", 15, "bold"),
+                                    fg="yellow", bg="black", padx=20, pady=10, command=self.open_search_bill)
+        search_bill_button.place(x=150, y=330)
+
+        search_bill_con_button = Button(self.my_frame6, text="Search Bill Through Consumer No", font=("Helvetica", 15, "bold"),
+                                        fg="yellow", bg="black", padx=20, pady=10, command=self.open_search_con_bill)
+        search_bill_con_button.place(x=150, y=400)
+
+        closesearch_button = Button(self.my_frame6, text=" X Close", font=("Helvetica", 10, "bold"),
+                                    fg="black", bg="red", command=lambda: self.close(5))
+        closesearch_button.place(x=680, y=50)
+
+        disp_label = Label(self.my_frame8, text="", font=("Helvetica", 10, "bold"), fg="white", bg="black")
+        disp_label.place(x=120, y=220)
+
+
+        #########################################################################################################
+
+        # search One Customer
+
+        view_head_label = Label(self.my_frame8, text="SEARCH CUSTOMER", font=("Helvetica", 30, "bold"), fg="blue",
+                                bg="black", padx=20, pady=20)
+        view_head_label.grid(row=0, column=0)
+
+
+        view_con_label = Label(self.my_frame8, text="Consumer No:", font=("Helvetica", 10, "bold"), fg="white",
+                               bg="black", padx=20, pady=20)
+        view_con_label.grid(row=1, column=0)
+
+        self.con = Entry(self.my_frame8, width=30)
         self.con.grid(row=1, column=2, padx=20)
 
-        search_record_button = Button(self.my_frame6, text="Search", font=("Helvetica", 10, "bold"), fg="black",
-                                      bg="green", padx=30)
+        search_record_button = Button(self.my_frame8, text="Search", font=("Helvetica", 10, "bold"), fg="black",
+                                      bg="green", padx=30, command=self.search_one_customer)
         search_record_button.grid(row=3, column=0, columnspan=2, padx=20, pady=20)
+
+        close_one_button = Button(self.my_frame8, text=" X Close", font=("Helvetica", 10, "bold"),
+                                  fg="black", bg="red", command=lambda: self.close(7))
+        close_one_button.place(x=680, y=30)
+
+        ################################################################################################################
+
+        # search list of customers
+
+        view_head_label = Label(self.my_frame9, text="SEARCH CUSTOMER", font=("Helvetica", 30, "bold"), fg="blue",
+                                bg="black", padx=20, pady=20)
+        view_head_label.grid(row=0, column=0)
+
+        view_list_label = Label(self.my_frame9, text="Search", font=("Helvetica", 12, "bold"), fg="white",
+                                bg="black")
+        view_list_label.grid(row=1, column=0)
+
+        self.view_list_entry = Entry(self.my_frame9, width=30)
+        self.view_list_entry.grid(row=1, column=1, padx=10)
+
+        self.drop = ttk.Combobox(self.my_frame9, values=["Search By..", "Division", "Name", "Zipcode", "Tariff"])
+        self.drop.current(0)
+        self.drop.grid(row=1, column=2)
+
+        search_consumer_button = Button(self.my_frame9, text="Search", font=("Helvetica", 10), bg="green", fg="black",
+                                        command=self.search_list)
+        search_consumer_button.grid(row=2, column=0)
+
+        # my_tree = ttk.Treeview(self.my_frame9)
+        #
+        # my_tree['columns'] = ("NAME", "Consumer No", "Meter No")
+        #
+        # my_tree.column("#0", anchor=W, width=0)
+        # my_tree.column("NAME", anchor=W, width=120)
+        # my_tree.column("Consumer No", anchor=W, width=120)
+        # my_tree.column("Meter No", anchor=W, width=120)
+        #
+        # my_tree.heading("NAME", text="Name", anchor=W)
+        # my_tree.heading("Consumer No", text="Consumer No", anchor=W)
+        # my_tree.heading("Meter No", text="Meter No", anchor=W)
+        # my_tree.grid(row=3, column=0, padx=20, pady=20)
+
+        close_list_button = Button(self.my_frame9, text=" X Close", font=("Helvetica", 10, "bold"),
+                                   fg="black", bg="red", command=lambda: self.close(8))
+        close_list_button.place(x=680, y=30)
+
+
+########################################################################################################################
+
+        # Search bill Through Bill No.
+
+        search_bill_label = Label(self.my_frame11, text="Search Bill", font=("Helvetica", 30, "bold"), fg="blue",
+                                  bg="black", padx=20, pady=20)
+        search_bill_label.grid(row=0, column=0)
+
+        entry_bill_label = Label(self.my_frame11, text="Bill No. ", font=("Helvetica", 12, "bold"), fg="white",
+                                 bg="black", padx=20, pady=20)
+        entry_bill_label.grid(row=1, column=0)
+
+        self.search_bill_no = Entry(self.my_frame11, width=30)
+        self.search_bill_no.grid(row=1, column=1)
+
+        sub_button = Button(self.my_frame11, text="Submit", font=("Helvetica", 12, "bold"), fg="black",
+                            bg="green", padx=10, command=self.search_billno)
+        sub_button.grid(row=2, column=1, columnspan=2)
+
+        close_bill_search_button = Button(self.my_frame11, text=" X Close", font=("Helvetica", 10, "bold"),
+                                          fg="black", bg="red", command=lambda: self.close(10))
+        close_bill_search_button.place(x=680, y=30)
+
+########################################################################################################################
+
+        # Search bill through Consumer No
+
+        search_bill_label12 = Label(self.my_frame12, text="Search Bill", font=("Helvetica", 30, "bold"), fg="blue",
+                                    bg="black", padx=20, pady=20)
+        search_bill_label12.grid(row=0, column=0)
+
+        entry_bill_label12 = Label(self.my_frame12, text="Consumer No.", font=("Helvetica", 12, "bold"), fg="white",
+                                   bg="black", padx=20, pady=20)
+        entry_bill_label12.grid(row=1, column=0)
+
+        self.bill_conentry = Entry(self.my_frame12, width=30)
+        self.bill_conentry.grid(row=1, column=1)
+
+        month_label = Label(self.my_frame12, text="Month", font=("Helvetica", 12, "bold"), fg="white",
+                            bg="black", padx=20, pady=20)
+        month_label.grid(row=2, column=0)
+
+        v = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+             "November", "December"]
+
+        self.drop1 = ttk.Combobox(self.my_frame12, values=v)
+        self.drop1.current(0)
+        self.drop1.grid(row=2, column=1)
+
+        year_label = Label(self.my_frame12, text="Year", font=("Helvetica", 12, "bold"), fg="white",
+                           bg="black", padx=20, pady=20)
+        year_label.grid(row=3, column=0)
+
+        self.bill_yearentry = Entry(self.my_frame12, width=30)
+        self.bill_yearentry.grid(row=3, column=1)
+
+        sub_billbutton = Button(self.my_frame12, text="Submit", font=("Helvetica", 12, "bold"), fg="black",
+                                bg="green", padx=10, command=self.search_bill_con)
+        sub_billbutton.grid(row=4, column=2, columnspan=2)
+
+        close_bill_search_button = Button(self.my_frame12, text=" X Close", font=("Helvetica", 10, "bold"),
+                                          fg="black", bg="red", command=lambda: self.close(11))
+        close_bill_search_button.place(x=680, y=30)
+
+
+
 
 
 ########################################################################################################################
 
         # Generate Bill
 
-        generate_head_label = Label(self.my_frame7, text="SEARCH RECORD", font=("Helvetica", 30, "bold"), fg="blue",
+        generate_head_label = Label(self.my_frame7, text="BILL GENERATION", font=("Helvetica", 30, "bold"), fg="blue",
                                     bg="black", padx=20, pady=20)
         generate_head_label.grid(row=0, column=0)
 
@@ -457,24 +701,73 @@ class HomePageMaster:
         generate_label1.grid(row=2, column=0, pady=10)
 
 
-
-        self.con_no = Entry(self.my_frame7, width=30)
-        self.con_no.grid(row=1, column=2, padx=20, pady=10)
+        self.consumer_no = Entry(self.my_frame7, width=30)
+        self.consumer_no.grid(row=1, column=1)
 
         self.cur = Entry(self.my_frame7, width=30)
-        self.cur.grid(row=2, column=2, padx=20, pady=10)
+        self.cur.grid(row=2, column=1, padx=20, pady=10)
 
         generate_bill_button = Button(self.my_frame7, text="Generate Bill", font=("Helvetica", 10, "bold"), fg="black",
-                                      bg="green", padx=30)
+                                      bg="green", padx=30, command=self.generate_bill_fun)
         generate_bill_button.grid(row=4, column=0, columnspan=2, padx=20, pady=20)
 
+        close_list_button = Button(self.my_frame7, text=" X Close", font=("Helvetica", 10, "bold"),
+                                   fg="black", bg="red", command=lambda: self.close(6))
+        close_list_button.place(x=680, y=30)
+
+########################################################################################################################
+
+        # Delete Customer
+
+        view_head_label_delete = Label(self.my_frame10, text="DELETE CUSTOMER", font=("Helvetica", 30, "bold"),
+                                       fg="blue", bg="black", padx=20, pady=20)
+        view_head_label_delete.grid(row=0, column=0)
+
+        view_con_label = Label(self.my_frame10, text="Consumer No:", font=("Helvetica", 10, "bold"), fg="white",
+                               bg="black", padx=20, pady=20)
+        view_con_label.grid(row=1, column=0)
+
+        self.con_delete = Entry(self.my_frame10, width=30)
+        self.con_delete.grid(row=1, column=2, padx=20)
+
+        search_record_button = Button(self.my_frame10, text="Delete", font=("Helvetica", 10, "bold"), fg="black",
+                                      bg="green", padx=30, command=self.delete_customer_fun)
+        search_record_button.grid(row=3, column=0, columnspan=2, padx=20, pady=20)
+
+        close_one_button = Button(self.my_frame10, text=" X Close", font=("Helvetica", 10, "bold"),
+                                  fg="black", bg="red", command=lambda: self.close(9))
+        close_one_button.place(x=680, y=30)
+
+########################################################################################################################
+
+        # Payment
+
+        view_head_label_payment = Label(self.my_frame13, text="PAYMENT", font=("Helvetica", 30, "bold"),
+                                        fg="yellow", bg="black", padx=20, pady=20)
+        view_head_label_payment.grid(row=0, column=0)
 
 
+        consumer_entry_label = Label(self.my_frame13, text="Consumer No:", font=("Helvetica", 10, "bold"), fg="white",
+                                     bg="black", padx=20, pady=20)
+        consumer_entry_label.grid(row=1, column=0)
 
+        amount_entry_label = Label(self.my_frame13, text="Amount", font=("Helvetica", 10, "bold"), fg="white",
+                                   bg="black", padx=20, pady=20)
+        amount_entry_label.grid(row=2, column=0)
 
+        self.paycon = Entry(self.my_frame13, width=30)
+        self.paycon.grid(row=1, column=1)
 
+        self.payamt = Entry(self.my_frame13, width=30)
+        self.payamt.grid(row=2, column=1)
 
+        pay_submit = Button(self.my_frame13, text="Submit", font=("Helvetica", 12, "bold"), bg="green", fg='black',
+                            padx=20, pady=5, command=self.pay_and_save)
+        pay_submit.grid(row=3, column=1, columnspan=2)
 
+        close_pay_button = Button(self.my_frame13, text=" X Close", font=("Helvetica", 10, "bold"),
+                                  fg="black", bg="red", command=lambda: self.close(12))
+        close_pay_button.place(x=680, y=30)
 
 
 
@@ -487,20 +780,30 @@ class HomePageMaster:
 
         self.my_ntbk.select(1)
 
+
     def generate_bill(self):
 
         self.my_ntbk.select(6)
-
 
 
     def add_adminpage(self):
 
         self.my_ntbk.select(4)
 
+
     def Records(self):
 
         self.my_ntbk.select(5)
 
+
+    def See_one_customer(self):
+
+        self.my_ntbk.select(7)
+
+
+    def See_list(self):
+
+        self.my_ntbk.select(8)
 
 
     def submit_passwd(self):
@@ -508,6 +811,7 @@ class HomePageMaster:
         oldPassword = self.old_passwd.get()
         newPassword = self.new_passwd.get()
         renewPassword = self.renew_passwd.get()
+        print(oldPassword)
 
         if oldPassword == "":
             messagebox.showerror("ERROR", "Invalid Entry")
@@ -566,14 +870,13 @@ class HomePageMaster:
                     messagebox.showerror("ERROR", e)
 
 
-
     def add_customer(self):
 
         self.my_ntbk.select(2)
 
 
-
     def submit_customer_details(self):
+
 
         response = messagebox.askyesno("SUBMIT", "Are you sure")
 
@@ -598,9 +901,9 @@ class HomePageMaster:
 
                 sql_command = "INSERT INTO customer(Meterno, name, zipcode, address, Tariff, division, Email, phno) " \
                               "VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"
-                values = (self.meterno.get(), self.name.get(), self.zipcode.get(), self.address.get(), self.tariff.get(),
+                values = (int(self.meterno.get()), self.name.get(), int(self.zipcode.get()), self.address.get(), int(self.tariff.get()),
                           self.division.get(), self.email.get(),
-                          self.phno.get())
+                          int(self.phno.get()))
 
                 cursor.execute(sql_command, values)
 
@@ -612,10 +915,11 @@ class HomePageMaster:
 
                 messagebox.showerror("Error", "Invalid Entry")
 
+
+
         else:
 
             pass
-
 
 
     def save_admins(self):
@@ -674,7 +978,7 @@ class HomePageMaster:
         global label
 
 
-
+        label.destroy()
 
 
         try:
@@ -694,17 +998,24 @@ class HomePageMaster:
             cursor.execute(f'SELECT * from ADMIN WHERE name="{n}"')
             adminsearch = cursor.fetchall()
 
+            text_variable = str()
+
             for i in adminsearch:
 
-                label = Label(self.my_frame4, text=str(l[2]) + " : " + str(i[3]), fg="White", bg="black",
-                              font=("Helvetica", 10, "bold"), padx=20)
+                text_variable = f' ADMIN NO : {i[3]}  \n\n NAME : {i[1]} \n\n USERID : {i[0]}'
+
+                # label = Label(self.my_frame4, text=str(l[2]) + "  :  " + str(i[3]), fg="White", bg="black",
+                #               font=("Helvetica", 10, "bold"), padx=20)
+                # label.place(x=350, y=200)
+                # label = Label(self.my_frame4, text=str(l[0]) + "  :  " + i[1], fg="White", bg="black",
+                #               font=("Helvetica", 10, "bold"), padx=20)
+                # label.place(x=350, y=220)
+                # label = Label(self.my_frame4, text=str(l[1]) + "  :  " + i[0], fg="White", bg="black",
+                #               font=("Helvetica", 10, "bold"), padx=20)
+                # label.place(x=350, y=240)
+                label = Label(self.my_frame4, text=text_variable, fg="White", bg="black",
+                              font=("Helvetica", 10, "bold"), padx=20, justify=LEFT)
                 label.place(x=350, y=200)
-                label = Label(self.my_frame4, text=str(l[0]) + " : " + i[1], fg="White", bg="black",
-                              font=("Helvetica", 10, "bold"), padx=20)
-                label.place(x=350, y=220)
-                label = Label(self.my_frame4, text=str(l[1]) + " : " + i[0], fg="White", bg="black",
-                              font=("Helvetica", 10, "bold"), padx=20)
-                label.place(x=350, y=240)
 
 
 
@@ -713,17 +1024,10 @@ class HomePageMaster:
             messagebox.showerror("ERROR", "!!ERROR!!")
 
 
-
-
-
-
-
-
-
     def list(self):
 
         self.my_ntbk.select(3)
-
+        self.list_admins()
 
 
     def exit(self):
@@ -740,6 +1044,1122 @@ class HomePageMaster:
             pass
 
 
-admin = "admin@admin"
-x = HomePageMaster(admin)
-x.mainhomepage()
+    def search_one_customer(self):
+
+        global disp_label
+
+        disp_label.place_forget()
+
+
+        consumer_no = self.con.get()
+
+
+        if consumer_no == "":
+            messagebox.showerror("ERROR", "Invalid entry")
+
+        elif consumer_no == " ":
+            messagebox.showerror("ERROR", "Invalid entry")
+
+        else:
+
+            consumer_no = int(consumer_no)
+
+            try:
+
+                db = mysql.connector.connect(
+                    host="localhost",
+                    user="root",
+                    passwd="Iamankit@02",
+                    database="ebm"
+                )
+
+                cursor = db.cursor()
+                cursor.execute(f'SELECT * from customer where consumerno={consumer_no}')
+                search_result = cursor.fetchall()
+
+
+                if search_result == []:
+
+                    messagebox.showwarning("Warning", "No Data Found")
+                else:
+
+
+                    text = str()
+
+                    for result1 in search_result:
+
+                        text = f' NAME :                  {result1[1]} \n\n CONSUMER NO :    {result1[8]} \n\n METER NO :            {result1[0]} \n\n ' \
+                               f'ADDRESS :             {result1[3]} \n\n ZIPCODE :               {result1[2]} \n\n DIVISION :               {result1[5]} \n\n ' \
+                               f'TARIFF :                  {result1[4]} \n\n PHONE NO. :           {result1[7]} \n\n EMAIL :                  {result1[6]}'
+
+
+                    disp_label = Label(self.my_frame8, text=text, font=("Helvetica", 10, "bold"), fg="white", bg="black",
+                                       justify=LEFT)
+                    disp_label.place(x=170, y=200)
+
+
+
+
+
+            except:
+
+                messagebox.showerror("ERROR", "!!ERROR!!")
+
+
+    def search_list(self):
+
+        global my_tree
+
+        my_tree = ttk.Treeview(self.my_frame9)
+
+        my_tree['columns'] = ("NAME", "Consumer No", "Meter No")
+
+        my_tree.column("#0", anchor=W, width=0)
+        my_tree.column("NAME", anchor=W, width=120)
+        my_tree.column("Consumer No", anchor=W, width=120)
+        my_tree.column("Meter No", anchor=W, width=120)
+
+        my_tree.heading("NAME", text="Name", anchor=W)
+        my_tree.heading("Consumer No", text="Consumer No", anchor=W)
+        my_tree.heading("Meter No", text="Meter No", anchor=W)
+        my_tree.grid(row=3, column=0, padx=20, pady=20)
+
+
+        selected = self.drop.get()
+        value = self.view_list_entry.get()
+
+        if value == "":
+            messagebox.showerror("ERROR", "Invalid Entry")
+
+        elif value == " ":
+            messagebox.showerror("ERROR", "Invalid Entry")
+
+        else:
+
+            if selected == "Search by...":
+
+                messagebox.showwarning("WARNING", "Invalid Selection")
+
+
+            elif selected == "Division":
+
+
+
+                if value == "":
+                    messagebox.showerror("ERROR", "Invalid entry")
+
+                elif value == " ":
+
+                    messagebox.showerror("ERROR", "Invalid entry")
+
+                else:
+
+
+
+                    try:
+
+                        db = mysql.connector.connect(
+                            host="localhost",
+                            user="root",
+                            passwd="Iamankit@02",
+                            database="ebm"
+                        )
+
+                        cursor = db.cursor()
+                        cursor.execute(f'SELECT * from customer where division="{value}"')
+                        search_result = cursor.fetchall()
+
+                        if search_result == []:
+
+                            messagebox.showwarning("Warning", "No Data Found")
+                        else:
+
+
+                            i = 0
+
+                            for result1 in search_result:
+
+                                my_tree.insert(parent="", index='end', iid=i, values=(result1[1], result1[8], result1[0]))
+                                i += 1
+
+
+
+                    except:
+
+                        messagebox.showerror("ERROR", "!!ERROR!!")
+
+
+            elif selected == "Name":
+
+                if value == "":
+                    messagebox.showerror("ERROR", "Invalid entry")
+
+                elif value == " ":
+
+                    messagebox.showerror("ERROR", "Invalid entry")
+
+                else:
+
+                    try:
+
+                        db = mysql.connector.connect(
+                            host="localhost",
+                            user="root",
+                            passwd="Iamankit@02",
+                            database="ebm"
+                        )
+
+                        cursor = db.cursor()
+                        cursor.execute(f'SELECT * from customer where Name="{value}"')
+                        search_result = cursor.fetchall()
+
+                        if search_result == []:
+
+                            messagebox.showwarning("Warning", "No Data Found")
+                        else:
+
+
+                            i = 0
+
+                            for result1 in search_result:
+                                my_tree.insert(parent="", index='end', iid=i, values=(result1[1], result1[8], result1[0]))
+                                i += 1
+
+
+
+                    except:
+
+                        messagebox.showerror("ERROR", "!!ERROR!!")
+
+
+            elif selected == "Zipcode":
+
+                if value == "":
+                    messagebox.showerror("ERROR", "Invalid entry")
+
+                elif value == " ":
+
+                    messagebox.showerror("ERROR", "Invalid entry")
+
+                else:
+
+                    value = int(value)
+
+                    try:
+
+                        db = mysql.connector.connect(
+                            host="localhost",
+                            user="root",
+                            passwd="Iamankit@02",
+                            database="ebm"
+                        )
+
+                        cursor = db.cursor()
+                        cursor.execute(f'SELECT * from customer where Zipcode="{value}"')
+                        search_result = cursor.fetchall()
+
+                        if search_result == []:
+
+                            messagebox.showwarning("Warning", "No Data Found")
+                        else:
+
+
+                            i = 0
+
+                            for result1 in search_result:
+                                my_tree.insert(parent="", index='end', iid=i, values=(result1[1], result1[8], result1[0]))
+                                i += 1
+
+                    except:
+
+                        messagebox.showerror("ERROR", "!!ERROR!!")
+
+
+            elif selected == "Tariff":
+
+                if value == "":
+                    messagebox.showerror("ERROR", "Invalid entry")
+
+                elif value == " ":
+
+                    messagebox.showerror("ERROR", "Invalid entry")
+
+                else:
+
+                    value = int(value)
+
+                    try:
+
+                        db = mysql.connector.connect(
+                            host="localhost",
+                            user="root",
+                            passwd="Iamankit@02",
+                            database="ebm"
+                        )
+
+                        cursor = db.cursor()
+                        cursor.execute(f'SELECT * from customer where Tariff="{value}"')
+                        search_result = cursor.fetchall()
+
+                        if search_result == []:
+
+                            messagebox.showwarning("Warning", "No Data Found")
+                        else:
+
+                            i = 0
+
+                            for result1 in search_result:
+                                my_tree.insert(parent="", index='end', iid=i, values=(result1[1], result1[8], result1[0]))
+                                i += 1
+
+                    except:
+
+                        messagebox.showerror("ERROR", "!!ERROR!!")
+
+            else:
+
+                messagebox.showwarning("WARNING", "No Data Found")
+
+
+    def generate_bill_fun(self):
+
+
+        global d
+        global root1
+        global consumer
+        global total
+        global current_reading
+        global tariff
+        global curr_date
+        global curr_month
+        global curr_year
+        global outstanding
+        global prev_reading
+        global rate
+        global fixd_charge
+        global phone
+        global curr_month
+        global net
+        global diff_reading
+        global energy_charge
+        tariff = 0
+        current_reading = self.cur.get()
+        consumer = self.consumer_no.get()
+        d = datetime.datetime.now()
+        curr_date = d.strftime("%x")
+        curr_month = d.strftime("%B")
+        curr_year = d.strftime("%Y")
+        curr_time = d.strftime("%X")
+        outstanding = 0
+        prev_reading = 0
+        rate = 0
+        fixd_charge = 0
+        phone = 0
+        division = ''
+        add = ''
+        name = ''
+        meterno = 00
+        net = 0
+
+
+        if current_reading == "":
+
+            messagebox.showerror("ERROR", "Invalid Entry")
+
+        elif consumer == "":
+            messagebox.showerror("ERROR", "Invalid Entry")
+
+
+        else:
+
+            consumer = int(consumer)
+            current_reading = int(current_reading)
+
+            try:
+
+                db = mysql.connector.connect(
+                    host="localhost",
+                    user="root",
+                    passwd="Iamankit@02",
+                    database="ebm"
+                )
+
+                root1 = Tk()
+                root1.title('BILL')
+
+                root1.geometry("400x680")
+
+                # Create A Main Frame
+                main_frame = Frame(root1)
+                main_frame.pack(fill=BOTH, expand=1)
+
+                # Create A Canvas
+                my_canvas = Canvas(main_frame)
+                my_canvas.pack(side=LEFT, fill=BOTH, expand=1)
+
+                # Add A Scrollbar To The Canvas
+                my_scrollbar = ttk.Scrollbar(main_frame, orient=VERTICAL, command=my_canvas.yview)
+                my_scrollbar.pack(side=RIGHT, fill=Y)
+
+                # Configure The Canvas
+                my_canvas.configure(yscrollcommand=my_scrollbar.set)
+                my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
+
+                # Create ANOTHER Frame INSIDE the Canvas
+                second_frame = Frame(my_canvas)
+
+                # Add that New frame To a Window In The Canvas
+                my_canvas.create_window((0, 0), window=second_frame, anchor="nw")
+
+
+                cursor = db.cursor()
+
+                try:
+
+                    cursor.execute(f'SELECT * from customer where ConsumerNO={consumer}')
+                    search_result = cursor.fetchall()
+
+                    for data in search_result:
+
+                        tariff = data[4]
+                        phone = data[7]
+                        division = data[5]
+                        add = data[3]
+                        name = data[1]
+                        meterno = data[0]
+
+                except:
+
+                    messagebox.showwarning("Warning", "No Data found")
+
+
+
+                try:
+
+
+                    cursor.execute(f'SELECT * from tariff where T_id="{int(tariff)}"')
+                    tariff_result = cursor.fetchall()
+
+                    for i in tariff_result:
+                        fixd_charge = int(i[2])
+                        rate = int(i[1])
+
+                except:
+
+                    messagebox.showwarning("Warning", "No Data found")
+
+
+
+                try:
+                    cursor.execute(f'SELECT dob, reading as last FROM reading where con_no={consumer} ORDER BY dob DESC LIMIT 1')
+                    reading_data = cursor.fetchall()
+
+                    for read in reading_data:
+                        prev_date = read[0]
+                        prev_reading = int(read[1])
+
+
+                except:
+
+                    messagebox.showwarning("Warning", "No Data found")
+
+                try:
+                     cursor.execute(f'SELECT out_amount as last FROM outstanding_amt where con_no={consumer} ORDER BY date_reading DESC LIMIT 1')
+                     out = cursor.fetchall()
+
+                     for outamt in out:
+                         outstanding = outamt[0]
+
+                except:
+
+                    messagebox.showwarning("Warning", "No Data found")
+
+
+                diff_reading = current_reading - prev_reading
+                energy_charge = diff_reading * rate
+                total = energy_charge + fixd_charge
+                net = total + outstanding
+
+
+
+                bill_content = f' Electricity Department \n\n\n Bill \n\n\n\n\n' \
+                               f'Division : {division} \n\n Consumer No. : {consumer} \n\n Name : {name} \n\n ' \
+                               f'Address : {add} \n\n Phone No. : {phone}' \
+                               f'\n\n\n --------Comercial Detaills-------- \n\n\n ' \
+                               f'Tariff : {tariff} \n\n Load : 220V \n\n' \
+                               f'--------Meter Details-------- \n\n\n' \
+                               f'Meter No. : {meterno} \n\n ' \
+                               f'--------Billing Parameter-------- \n\n\n' \
+                               f'Bill Issue Date : {curr_date} \n\n Bill Month : {curr_month} \n\n Time : {curr_time} \n\nDate Of Previous Reading' \
+                               f' : {prev_date} \n\n Previous Reading : {prev_reading} \n\n Current Reading : {current_reading} \n\n ' \
+                               f'Difference : {diff_reading} \n\n ' \
+                               f'--------Current Assessment--------\n\n\n' \
+                               f'Energy Charge : {energy_charge} \n\n Fixed Charge = {fixd_charge} \n\n ' \
+                               f'--------Net Demand-------- \n\n\n' \
+                               f'Total Amount : {total} \n\n Outstanding Amt : {outstanding} \n\n Net Payable: {net}'
+
+
+                bill_label = Label(second_frame, text=bill_content, font=("Helvetica", 12, "bold"), justify=LEFT)
+                bill_label.grid(row=0, columnspan=2, column=0)
+                bill_button = Button(second_frame, text="SAVE", font=("Helvetica", 12, "bold"), bg="green", fg="black",
+                                     command=self.save_bill)
+                bill_button.grid(row=1, column=0, padx=40)
+                pay_save_button = Button(second_frame, text="PAY & SAVE", font=("Helvetica", 12, "bold"), bg="green",
+                                         fg="black", command=self.pay_and_save)
+                pay_save_button.grid(row=1, column=1, padx=40)
+
+                # try:
+                #
+                #     sql_command = "INSERT INTO reading(dob, con_no, reading) VALUES(%s,%s,%s)"
+                #     values = (d, consumer, current_reading)
+                #     cursor.execute(sql_command, values)
+                #
+                #     db.commit()
+                #
+                #
+                # except EXCEPTION as ee:
+                #
+                #     messagebox.showerror("ERROR", "Unable to update reading")
+                #     print(ee)
+
+
+
+                root1.mainloop()
+
+            except:
+
+                messagebox.showerror("ERROR", "!!ERROR!!")
+
+
+    def save_bill(self):
+
+        global consumer
+        global d
+        global root1
+        global current_reading
+        global total
+        global prev_reading
+        global outstanding
+        global curr_month
+        global curr_year
+        global net
+        global diff_reading
+        global energy_charge
+
+        try:
+
+            db = mysql.connector.connect(
+                host="localhost",
+                user="root",
+                passwd="Iamankit@02",
+                database="ebm"
+            )
+            cursor = db.cursor()
+
+            sql_command = "INSERT INTO reading(dob, con_no, reading) VALUES(%s,%s,%s)"
+            values = (d, consumer, current_reading)
+
+            sql_command1 = "INSERT INTO bill(bill_date, tot_amt, con_no, current_reading, previous_reading, " \
+                           "outstanding_amt, bill_month, year, diff, energy_charge) VALUES(%s,%s,%s,%s,%s,%s,%s,%s, %s,%s)"
+            values1 = (d, total, consumer, current_reading, prev_reading, outstanding, curr_month, int(curr_year), diff_reading, energy_charge)
+
+
+
+            sql_command2 = "INSERT INTO outstanding_amt(con_no, date_reading, out_amount, tot_amt, out_month)" \
+                           "values(%s,%s,%s,%s,%s)"
+            values2 = (consumer, d, net, total, curr_month)
+
+
+            cursor.execute(sql_command, values)
+            cursor.execute(sql_command1, values1)
+            cursor.execute(sql_command2, values2)
+
+            db.commit()
+
+            messagebox.showinfo("INFO", "Saved")
+            root1.destroy()
+
+
+
+
+
+        except EXCEPTION as ee:
+
+            messagebox.showerror("ERROR", "Unable to Save")
+            print(ee)
+
+
+    def pay_and_save(self):
+
+        consumer_no = self.paycon.get()
+        amount = self.payamt.get()
+        d = datetime.date.today()
+        month = d.strftime("%B")
+
+        if consumer_no == "":
+            messagebox.showerror("ERROR", "Invalid Entry")
+
+        elif consumer_no == " ":
+            messagebox.showerror("ERROR", "Invalid Entry")
+
+        elif amount == "":
+            messagebox.showerror("ERROR", "Invalid Entry")
+
+        elif amount == " ":
+            messagebox.showerror("ERROR", "Invalid Entry")
+
+        elif int(amount) == 0:
+            messagebox.showwarning("Warning", "Cannot Be Zero")
+
+        else:
+
+            consumer_no = int(consumer_no)
+            amount = int(amount)
+
+            try:
+
+                db = mysql.connector.connect(
+                    host="localhost",
+                    user="root",
+                    passwd="Iamankit@02",
+                    database="ebm"
+                )
+                cursor = db.cursor()
+
+                cursor.execute(f'SELECT out_amount as last FROM outstanding_amt where con_no={consumer_no} ORDER BY date_reading DESC LIMIT 1')
+                payresult = cursor.fetchall()
+
+                for i in payresult:
+                    outamt = i[0]
+
+
+                out_push = outamt - amount
+
+                sql_command = "INSERT INTO payment(payment_status, Amount, Con_no) Values(%s,%s,%s)"
+                values = ("success", amount, consumer_no)
+
+
+
+                sql_command2 = "INSERT INTO outstanding_amt(con_no, date_reading, out_amount, tot_amt, out_month)" \
+                               "values(%s,%s,%s,%s,%s)"
+                values2 = (consumer_no, d, out_push, amount, month)
+
+                cursor.execute(sql_command, values)
+                cursor.execute(sql_command2, values2)
+
+                db.commit()
+
+                webbrowser.open("https://rzp.io/l/uqQgiTS")
+                self.my_ntbk.hide(12)
+
+
+
+
+
+            except:
+
+                messagebox.showerror("ERROR", "Unable to Save")
+
+
+
+
+
+
+
+    def delete_admins(self):
+
+        global my_listbox
+        global label
+
+        label.destroy()
+
+        delete = my_listbox.get(ANCHOR)
+
+        if delete == "":
+
+            messagebox.showwarning("Warning", "Item not selected")
+
+        else:
+
+            response = messagebox.askyesno("Confirmation", "Are You Sure")
+            print(response)
+
+            if response == 0:
+                print(response, "kumar")
+
+                pass
+
+
+            else:
+
+
+
+                try:
+
+                    db = mysql.connector.connect(
+                        host="localhost",
+                        user="root",
+                        passwd="Iamankit@02",
+                        database="ebm"
+                    )
+
+                    cursor = db.cursor()
+                    print(response, "ankit2")
+
+                    print(response, "ankit1")
+                    print(delete)
+                    print(type(delete))
+
+                    cursor.execute(f'Delete From admin where name="{delete}"')
+                    db.commit()
+
+                    messagebox.showinfo("Item Deleted", "Deleted")
+
+
+                except:
+
+                    messagebox.showerror("ERROR", "!!ERROR!!")
+
+
+    def list_admins(self):
+
+        global label
+        global my_listbox
+
+        label.destroy()
+
+        try:
+
+            db = mysql.connector.connect(
+                host="localhost",
+                user="root",
+                passwd="Iamankit@02",
+                database="ebm"
+            )
+
+            my_listbox = Listbox(self.my_frame4, bg="black", fg="white", width=50, height=200)
+            my_listbox.grid(row=0, column=0)
+            cursor = db.cursor()
+            cursor.execute("SELECT Name Adminno from admin")
+            admins = cursor.fetchall()
+            for admin in admins:
+
+                my_listbox.insert(END, admin[0])
+
+
+        except :
+
+            messagebox.showerror("ERROR", "!!ERROR!!")
+
+
+        # label = Label(self.my_frame4, text="", fg="White", bg="black",
+        #               font=("Helvetica", 10, "bold"), padx=20)
+        # label.place(x=350, y=200)
+
+        details_button = Button(self.my_frame4, text="See Details", font=("Helvetica", 10, "bold"),
+                                fg="black", bg="grey", command=self.see_detailsadmin)
+        details_button.place(x=350, y=50)
+
+        deleteadmin_button = Button(self.my_frame4, text="Delete", font=("Helvetica", 10, "bold"),
+                                    fg="black", bg="grey", command=self.delete_admins)
+        deleteadmin_button.place(x=490, y=50)
+
+        closeadmin_button = Button(self.my_frame4, text="Close", font=("Helvetica", 10, "bold"),
+                                   fg="black", bg="red", command=lambda: self.close(3))
+        closeadmin_button.place(x=560, y=50)
+
+
+    def delete_customer(self):
+
+        self.my_ntbk.select(9)
+
+
+    def delete_customer_fun(self):
+
+
+        consumer_no = self.con_delete.get()
+
+        if consumer_no == "":
+            messagebox.showerror("ERROR", "Invalid entry")
+
+        elif consumer_no == " ":
+            messagebox.showerror("ERROR", "Invalid entry")
+
+        else:
+
+
+            consumer_no = int(consumer_no)
+
+            try:
+
+                db = mysql.connector.connect(
+                    host="localhost",
+                    user="root",
+                    passwd="Iamankit@02",
+                    database="ebm"
+                )
+
+                cursor = db.cursor()
+                cursor.execute(f'Select * from customer where consumerno={consumer_no}')
+                result = cursor.fetchall()
+
+                for data in result:
+
+                    cons = data[8]
+
+
+                cons = int(cons)
+
+                response = messagebox.askyesno("Warning", "Are You Sure")
+                if response == 0:
+                    pass
+
+                else:
+
+                    cursor.execute(f'DELETE from customer where consumerno={cons}')
+                    db.commit()
+
+                    messagebox.showinfo("INFO", "Deleted!!")
+
+
+
+
+            except:
+
+                messagebox.showwarning("Warning", "No Data found")
+
+
+    def open_search_bill(self):
+
+        self.my_ntbk.select(10)
+
+
+    def open_search_con_bill(self):
+
+        self.my_ntbk.select(11)
+
+
+    def search_billno(self):
+
+        global root1
+
+
+        bill_no = self.search_bill_no.get()
+
+        if bill_no == "":
+
+            messagebox.showerror("ERROR", "Invalid Entry")
+
+        elif bill_no == " ":
+            messagebox.showerror("ERROR", "Invalid Entry")
+
+
+        else:
+
+            bill_no = int(bill_no)
+
+            try:
+
+                db = mysql.connector.connect(
+                    host="localhost",
+                    user="root",
+                    passwd="Iamankit@02",
+                    database="ebm"
+                )
+
+                root1 = Tk()
+                root1.title('BILL')
+
+                root1.geometry("400x680")
+
+                # Create A Main Frame
+                main_frame = Frame(root1)
+                main_frame.pack(fill=BOTH, expand=1)
+
+                # Create A Canvas
+                my_canvas = Canvas(main_frame)
+                my_canvas.pack(side=LEFT, fill=BOTH, expand=1)
+
+                # Add A Scrollbar To The Canvas
+                my_scrollbar = ttk.Scrollbar(main_frame, orient=VERTICAL, command=my_canvas.yview)
+                my_scrollbar.pack(side=RIGHT, fill=Y)
+
+                # Configure The Canvas
+                my_canvas.configure(yscrollcommand=my_scrollbar.set)
+                my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
+
+                # Create ANOTHER Frame INSIDE the Canvas
+                second_frame = Frame(my_canvas)
+
+                # Add that New frame To a Window In The Canvas
+                my_canvas.create_window((0, 0), window=second_frame, anchor="nw")
+
+
+                cursor = db.cursor()
+
+                try:
+
+                    cursor.execute(f'SELECT * from bill where BillNo={bill_no}')
+                    search_result = cursor.fetchall()
+
+                    for data in search_result:
+                        bill_sdate = data[1]
+                        tot_samt = data[2]
+                        scon = int(data[3])
+                        scurrent_reading = data[4]
+                        sprev_reading = data[5]
+                        sout_amt = data[6]
+                        sbill_month = data[7]
+                        sbill_year = data[8]
+                        sdiff = data[9]
+                        senergy_charge = data[10]
+
+
+                except:
+
+                    messagebox.showwarning("Warning", "No Data found")
+
+
+                try:
+
+                    cursor.execute(f'SELECT * from customer where ConsumerNo={scon}')
+                    customer_result = cursor.fetchall()
+
+                    for search_data in customer_result:
+
+
+                        stariff = search_data[4]
+                        sphone = search_data[7]
+                        sdivision = search_data[5]
+                        sadd = search_data[3]
+                        sname = search_data[1]
+                        smeterno = search_data[0]
+
+                except:
+
+                    messagebox.showwarning("Warning", "No Data found")
+
+
+
+                try:
+
+                    cursor.execute(f'SELECT * from tariff where T_id="{int(stariff)}"')
+                    tariff_result = cursor.fetchall()
+
+                    for i in tariff_result:
+                        sfixd_charge = int(i[2])
+
+                except:
+
+                    messagebox.showwarning("Warning", "No Data found")
+
+
+
+
+                bill_content = f' Electricity Department \n\n\n Bill \n\n\n\n\n' \
+                               f'Division : {sdivision} \n\n Consumer No. : {scon} \n\n Name : {sname} \n\n ' \
+                               f'Address : {sadd} \n\n Phone No. : {sphone}' \
+                               f'\n\n\n --------Comercial Detaills-------- \n\n\n ' \
+                               f'Tariff : {stariff} \n\n Load : 220V \n\n' \
+                               f'--------Meter Details-------- \n\n\n' \
+                               f'Meter No. : {smeterno} \n\n ' \
+                               f'--------Billing Parameter-------- \n\n\n' \
+                               f'Bill Issue Date : {bill_sdate} \n\n Bill Month : {sbill_month} ' \
+                               f'\n\n Previous Reading : {sprev_reading} \n\n Current Reading : {scurrent_reading} \n\n ' \
+                               f'Difference : {sdiff} \n\n ' \
+                               f'--------Current Assessment--------\n\n\n' \
+                               f'Energy Charge : {senergy_charge} \n\n Fixed Charge = {sfixd_charge} \n\n ' \
+                               f'--------Net Demand-------- \n\n\n' \
+                               f'Total Amount : {tot_samt} \n\n Outstanding Amt : {sout_amt} \n\n Net Payable: {tot_samt + sout_amt}'
+
+
+                bill_label = Label(second_frame, text=bill_content, font=("Helvetica", 12, "bold"), justify=LEFT)
+                bill_label.grid(row=0, columnspan=2, column=0)
+
+
+
+                # try:
+                #
+                #     sql_command = "INSERT INTO reading(dob, con_no, reading) VALUES(%s,%s,%s)"
+                #     values = (d, consumer, current_reading)
+                #     cursor.execute(sql_command, values)
+                #
+                #     db.commit()
+                #
+                #
+                # except EXCEPTION as ee:
+                #
+                #     messagebox.showerror("ERROR", "Unable to update reading")
+                #     print(ee)
+
+
+
+                root1.mainloop()
+
+            except:
+
+                messagebox.showerror("ERROR", "!!ERROR!!")
+
+
+    def search_bill_con(self):
+
+        global root1
+
+        consu_no = self.bill_conentry.get()
+        bill_mon = self.drop1.get()
+        year = self.bill_yearentry.get()
+
+        if consu_no == "":
+
+            messagebox.showerror("ERROR", "Invalid Entry")
+
+        elif consu_no == " ":
+            messagebox.showerror("ERROR", "Invalid Entry")
+
+
+        else:
+
+            consu_no = int(consu_no)
+            year = int(year)
+
+            try:
+
+                db = mysql.connector.connect(
+                    host="localhost",
+                    user="root",
+                    passwd="Iamankit@02",
+                    database="ebm"
+                )
+
+                root1 = Tk()
+                root1.title('BILL')
+
+                root1.geometry("400x680")
+
+                # Create A Main Frame
+                main_frame = Frame(root1)
+                main_frame.pack(fill=BOTH, expand=1)
+
+                # Create A Canvas
+                my_canvas = Canvas(main_frame)
+                my_canvas.pack(side=LEFT, fill=BOTH, expand=1)
+
+                # Add A Scrollbar To The Canvas
+                my_scrollbar = ttk.Scrollbar(main_frame, orient=VERTICAL, command=my_canvas.yview)
+                my_scrollbar.pack(side=RIGHT, fill=Y)
+
+                # Configure The Canvas
+                my_canvas.configure(yscrollcommand=my_scrollbar.set)
+                my_canvas.bind('<Configure>', lambda e: my_canvas.configure(scrollregion=my_canvas.bbox("all")))
+
+                # Create ANOTHER Frame INSIDE the Canvas
+                second_frame = Frame(my_canvas)
+
+                # Add that New frame To a Window In The Canvas
+                my_canvas.create_window((0, 0), window=second_frame, anchor="nw")
+
+                cursor = db.cursor()
+
+                try:
+
+                    cursor.execute(f'SELECT * from bill where con_no={consu_no} AND bill_month="{bill_mon}" AND year={year}')
+                    search_result = cursor.fetchall()
+
+                    for data in search_result:
+                        billnum = data[0]
+                        bill_sdate = data[1]
+                        tot_samt = data[2]
+                        scurrent_reading = data[4]
+                        sprev_reading = data[5]
+                        sout_amt = data[6]
+                        sbill_month = data[7]
+                        sbill_year = data[8]
+                        sdiff = data[9]
+                        senergy_charge = data[10]
+
+
+                except:
+
+                    messagebox.showwarning("Warning", "No Data found")
+
+                try:
+
+                    cursor.execute(f'SELECT * from customer where ConsumerNo={consu_no}')
+                    customer_result = cursor.fetchall()
+
+                    for search_data in customer_result:
+                        stariff = search_data[4]
+                        sphone = search_data[7]
+                        sdivision = search_data[5]
+                        sadd = search_data[3]
+                        sname = search_data[1]
+                        smeterno = search_data[0]
+
+                except:
+
+                    messagebox.showwarning("Warning", "No Data found")
+
+                try:
+
+                    cursor.execute(f'SELECT * from tariff where T_id="{int(stariff)}"')
+                    tariff_result = cursor.fetchall()
+
+                    for i in tariff_result:
+                        sfixd_charge = int(i[2])
+
+                except:
+
+                    messagebox.showwarning("Warning", "No Data found")
+
+                bill_content = f' Electricity Department \n\n\n Bill \n\n\n\n\n' \
+                               f'Division : {sdivision} \n\n Consumer No. : {consu_no} \n\n Name : {sname} \n\n ' \
+                               f'Address : {sadd} \n\n Phone No. : {sphone}' \
+                               f'\n\n\n --------Comercial Detaills-------- \n\n\n ' \
+                               f'Tariff : {stariff} \n\n Load : 220V \n\n' \
+                               f'--------Meter Details-------- \n\n\n' \
+                               f'Meter No. : {smeterno} \n\n ' \
+                               f'--------Billing Parameter-------- \n\n\n' \
+                               f'Bill Issue Date : {bill_sdate} \n\n Bill Month : {sbill_month} ' \
+                               f'\n\n Previous Reading : {sprev_reading} \n\n Current Reading : {scurrent_reading} \n\n ' \
+                               f'Difference : {sdiff} \n\n ' \
+                               f'--------Current Assessment--------\n\n\n' \
+                               f'Energy Charge : {senergy_charge} \n\n Fixed Charge = {sfixd_charge} \n\n ' \
+                               f'--------Net Demand-------- \n\n\n' \
+                               f'Total Amount : {tot_samt} \n\n Outstanding Amt : {sout_amt} \n\n Net Payable: {tot_samt + sout_amt}'
+
+                bill_label = Label(second_frame, text=bill_content, font=("Helvetica", 12, "bold"), justify=LEFT)
+                bill_label.grid(row=0, columnspan=2, column=0)
+
+                # try:
+                #
+                #     sql_command = "INSERT INTO reading(dob, con_no, reading) VALUES(%s,%s,%s)"
+                #     values = (d, consumer, current_reading)
+                #     cursor.execute(sql_command, values)
+                #
+                #     db.commit()
+                #
+                #
+                # except EXCEPTION as ee:
+                #
+                #     messagebox.showerror("ERROR", "Unable to update reading")
+                #     print(ee)
+
+                root1.mainloop()
+
+            except:
+
+                messagebox.showerror("ERROR", "!!ERROR!!")
+
+
+    def payment_select(self):
+        self.my_ntbk.select(12)
+
+
+
+
+
+
+# admin = "admin@admin"
+# x = HomePageMaster(admin)
+# x.mainhomepage()
+# # x.generate_bill_fun()

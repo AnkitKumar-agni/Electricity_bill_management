@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pay</title>
+</head>
+<body>
+    <button id="rzp-button1">Pay</button>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+    var options = {
+        "key": "rzp_test_nnz8x3lbvjCFOd", // Enter the Key ID generated from the Dashboard
+        "name": "Acme Corp",
+        "description": "Test Transaction",
+        "image": "https://example.com/your_logo",
+        "order_id": "order_JSqga0GVuTFvZc", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response){
+            alert(response.razorpay_payment_id);
+            alert(response.razorpay_order_id);
+            alert(response.razorpay_signature)
+        },
+        "prefill": {
+            "name": "Gaurav Kumar",
+            "email": "gaurav.kumar@example.com",
+            "contact": "9999999999"
+        },
+        "notes": {
+            "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function (response){
+            alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id);
+    });
+    document.getElementById('rzp-button1').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+    }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--    <head>-->
+<!--        <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--        <meta charset="utf-8">-->
+<!--        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">-->
+<!--        <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1,maximum-scale=1">-->
+<!--        <meta name="robots" content="index, follow">-->
+<!--        <meta name="description" content="Program name . Electricity Payment. . Program Description . Online payment. . Fee breakup . Bill Payment. . Name of the organiser . Electricity Department. ">-->
+
+<!--        <meta property="og:title" content="Pay for Electricity Payment by Ankit Kumar">-->
+<!--        <meta property="og:image" content="https://cdn.razorpay.com/static/assets/logo/rzp.png">-->
+<!--        <meta property="og:image:width" content="276px">-->
+<!--        <meta property="og:image:height" content="276px">-->
+<!--        <meta property="og:description" content="Program name . Electricity Payment. . Program Description . Online payment. . Fee breakup . Bill Payment. . Name of the organiser . Electricity Department. ">-->
+
+<!--        <meta name="twitter:card" content="summary" />-->
+<!--        <meta name="twitter:title" content="Pay for Electricity Payment by Ankit Kumar" />-->
+<!--        <meta name="twitter:description" content="Program name . Electricity Payment. . Program Description . Online payment. . Fee breakup . Bill Payment. . Name of the organiser . Electricity Department. " />-->
+<!--        <meta name="twitter:image" content="https://cdn.razorpay.com/static/assets/logo/rzp.png" />-->
+
+<!--        <link rel="icon" href="https://razorpay.com/favicon.png" type="image/x-icon" />-->
+
+
+<!--        <style>-->
+<!--            body {-->
+<!--                background-color: #383838;-->
+<!--            }-->
+<!--        </style>-->
+
+
+<!--        <script>-->
+<!--            var data = {"key_id":"rzp_test_nnz8x3lbvjCFOd","is_test_mode":true,"environment":"production","merchant":{"id":"JOp4YAYVlK9mFv","name":"Electricity Department","image":null,"brand_color":"rgb(35,113,236)","brand_text_color":"#ffffff","branding_variant":"control","optimised_web_vitals":"control","contact_optional":false,"email_optional":false,"support_email":"","support_mobile":"","tnc_link":null},"payment_link":{"id":"pl_JSU28SLhd0WtrQ","amount":null,"currency":"INR","currency_symbol":"₹","expire_by":null,"times_payable":null,"times_paid":0,"status":"active","status_reason":null,"short_url":"https:\/\/rzp.io\/l\/uqQgiTS","receipt":null,"title":"Electricity Payment","description":"{\"value\":[{\"insert\":\"Program name \"},{\"attributes\":{\"header\":2},\"insert\":\"\\n\"},{\"insert\":\"Electricity Payment\\n\\nProgram Description \"},{\"attributes\":{\"header\":2},\"insert\":\"\\n\"},{\"insert\":\"Online payment\\n\\nFee breakup \"},{\"attributes\":{\"header\":2},\"insert\":\"\\n\"},{\"insert\":\"Bill Payment\\n\\nName of the organiser \"},{\"attributes\":{\"header\":2},\"insert\":\"\\n\"},{\"insert\":\"Electricity Department\\n\"}],\"metaText\":\"Program name . Electricity Payment. . Program Description . Online payment. . Fee breakup . Bill Payment. . Name of the organiser . Electricity Department. \"}","support_contact":"100000000","support_email":"electricity.department@gmail.com","terms":"Once Paid then will not be returned. In case of dispute a written application should be submitted and the decision solely depends on the department.","type":"payment","payment_page_items":[{"id":"ppi_JSU28X4QFIVaVy","entity":"payment_page_item","payment_link_id":"pl_JSU28SLhd0WtrQ","item":{"id":"item_JSU28XNFI8yPfs","active":true,"name":"Amount","description":null,"amount":null,"unit_amount":null,"currency":"INR","type":"payment_page","unit":null,"tax_inclusive":false,"hsn_code":null,"sac_code":null,"tax_rate":null,"tax_id":null,"tax_group_id":null,"created_at":1651958337},"mandatory":false,"image_url":null,"min_purchase":null,"max_purchase":null,"min_amount":null,"max_amount":null,"settings":{"position":"1"},"plan_id":null,"product_config":null,"quantity_available":null}],"hosted_template_id":null,"udf_jsonschema_id":null,"min_amount_value":100,"amount_formatted":"0.00","expire_by_formatted":null,"settings":{"theme":"dark","allow_social_share":"0","payment_success_message":"Payment Successful!","payment_success_redirect_url":"","udf_schema":"[{\"name\":\"consumer_no\",\"title\":\"Consumer No\",\"required\":true,\"type\":\"number\",\"pattern\":\"number\",\"options\":{\"keydown_restrictive\":true},\"settings\":{\"position\":0}},{\"name\":\"email\",\"title\":\"Email\",\"required\":true,\"type\":\"string\",\"pattern\":\"email\",\"settings\":{\"position\":2}},{\"name\":\"phone\",\"title\":\"Phone\",\"required\":true,\"type\":\"number\",\"pattern\":\"phone\",\"minLength\":\"8\",\"options\":[],\"settings\":{\"position\":3}}]","checkout_options":{"email":"email","phone":"phone"},"payment_button_label":"Pay","version":"V2","enable_receipt":"1","enable_custom_serial_number":"0","selected_udf_field":"","enable_80g_details":"0"}},"base_url":"https:\/\/api.razorpay.com","org":{"branding":{"show_rzp_logo":true,"branding_logo":""},"custom_code":"rzp"},"view_preferences":{"exempt_customer_flagging":false,"disclaimer_text_enabled":"on"},"keyless_header":"api_v1:A9d2dcCKTQXNpJGwEGu3FOBz\/yt3Lg6v5UTNgTF5078eWTxHQmcybTycxiUgZtK7zVhlYZ4BcKSKOW2LwwqGlqwEikOd7w=="};-->
+
+<!--            var paymentPageData = data.payment_link;-->
+<!--            paymentPageData.description = paymentPageData.description ? JSON.parse(paymentPageData.description).value : null;-->
+
+<!--            var requestParams = [];-->
+
+<!--            var templateData = {-->
+<!--                key_id: data.key_id,-->
+<!--                base_url: data.base_url,-->
+<!--                is_test_mode: data.is_test_mode,-->
+<!--                merchant: data.merchant,-->
+<!--                org: data.org,-->
+<!--                payment_page_data: data.payment_link,-->
+<!--                context: {-->
+<!--                  page_title: data.payment_link.title,-->
+<!--                  form_title: 'Payment Details'-->
+<!--                },-->
+<!--                requestParams: requestParams,-->
+<!--                view_preferences: data.view_preferences,-->
+<!--                keyless_header: data.keyless_header,-->
+<!--              };-->
+<!--        </script>-->
+
+<!--                    <script>-->
+<!--                function renderPaymentPage() {-->
+<!--                    window.RZP.renderApp('paymentpage-container', templateData);-->
+<!--                }-->
+<!--            </script>-->
+<!--                            <script src="https://cdn.razorpay.com/static/analytics/bundle.js" defer></script>-->
+<!--                <script src="https://cdn.razorpay.com/static/assets/color.js" defer></script>-->
+<!--                <script src="https://cdn.razorpay.com/static/hosted/wysiwyg.js" onload="renderPaymentPage()" defer></script>-->
+<!--                        </head>-->
+
+<!--    <body>-->
+<!--        <div id="paymentpage-container">-->
+<!--                    </div>-->
+<!--        &lt;!&ndash; Adding checkout scripts after initial load &ndash;&gt;-->
+<!--                    <script>-->
+<!--                window.addEventListener('load', function() {-->
+<!--                    setTimeout(() => {-->
+<!--                        var script = document.createElement("script");-->
+<!--                        script.src = "https://checkout.razorpay.com/v1/checkout.js";-->
+<!--                        document.body.appendChild(script);-->
+<!--                    }, 2000);-->
+<!--                });-->
+<!--            </script>-->
+<!--            </body>-->
+<!--</html>-->
